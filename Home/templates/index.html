@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MidiFill Home page</title>
+    <link rel="stylesheet" href="{% static 'home.css'%}">
+
+
+    <style>
+      .modal-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 50;
+          background-color: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+      }
+
+      .modal {
+          background-color: white;
+          border-radius: 8px;
+          max-width: 500px;
+          height: 35rem;
+          width: 100%;
+          margin: 20px;
+          padding: 20px;
+          position: relative;
+          margin-left: 60.5rem;
+          margin-top: 11rem;
+      }
+
+      .modal-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #d3fcfa;
+          /* padding-bottom: 10px; */
+      }
+
+      .modal-header h3 {
+          font-size: 24px;
+          font-weight: 700;
+          color: #10847e;
+      }
+
+      .modal-header button {
+          background: transparent;
+          border: none;
+          color: #d3fcfa;
+          cursor: pointer;
+          padding: 1px;
+          border-radius: 50%;
+      }
+
+      .modal-header button:hover {
+          background-color: #E5E7EB;
+          color: #1F2937;
+      }
+
+      .modal-body {
+          padding: 20px 0;
+          position: relative;
+      }
+
+      .modal-body label {
+          display: block;
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 5px;
+          color: #10847e;
+      }
+
+      .modal-body input, .modal-body select, .modal-body textarea {
+          width: 80%;
+          padding: 10px;
+          border: 1px solid #D1D5DB;
+          border-radius: 8px;
+          font-size: 14px;
+          color: #1F2937;
+          margin-bottom: 20px;
+      }
+
+      .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus {
+          outline: none;
+          border-color: #10847e;
+      }
+
+      .modal-footer {
+          text-align: right;
+      }
+
+      .submit-button {
+          display: inline-flex;
+          align-items: center;
+          color: white;
+          background-color: #10847e;
+          border: none;
+          font-weight: 500;
+          border-radius: 8px;
+          font-size: 14px;
+          padding: 10px 20px;
+          text-align: center;
+          cursor: pointer;
+      }
+
+      .submit-button:hover {
+          background-color: #10847e;
+      }
+
+      .submit-button:focus {
+          outline: none;
+          box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5);
+      }
+
+      .submit-button svg {
+          margin-right: 5px;
+      }
+
+      {% comment %} #chatHistory {
+          max-height: 300px; /* Reduced height to accommodate input box */
+          overflow-y: scroll; /* Enable vertical scrolling */
+          border: 1px solid #ccc; /* Optional: Add a border for visual effect */
+          padding: 10px; /* Optional: Add padding for better spacing */
+          background-color: #f9f9f9; /* Optional: Background color */
+          margin-bottom: 60px; /* Margin to avoid overlap with fixed input box */
+      } {% endcomment %}
+
+      .fixed-input {
+          position: fixed;
+          bottom: 20px; /* Adjust based on your modal's padding */
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          background: white;
+          padding: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          z-index: 100; /* Ensure it is above other elements */
+      }
+  </style>
+<style>
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-output {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.chat-input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    width:21rem;
+}
+
+.chat-input-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #10847e;
+    color: white;
+    cursor: pointer;
+    margin-left: 0.2rem;
+}
+
+.chat-input-container button:hover {
+    background-color: #10847e;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+
+
+</style>
+
+    </head>
+<body>
+  
+  <main style="position:relative; overflow-x: hidden;">
+    <div id="chatbot" style="background-color:transparent; height:100%; width: 100vw; position:fixed; top:39.5rem; left:85.5rem; z-index:4; ">
+      <img src="{% static "images/chat.png" %}" alt="" width="8%">
+    </div>
+<!-- Main modal -->
+<div id="crud-modal" class="modal-overlay">
+  <div class="modal">
+    <!-- Modal header -->
+    <div class="modal-header" style="transition: all ease .3s;">
+      <h3>Medi ChatBOt</h3>
+       <buttonid="closeModal">
+       <img src="{% static "images/cutr.png" %}" alt="aaa" style="height: 1.5rem;">
+      </button>
+    </div>
+    {% comment %} <div id="chatHistory">
+      {% for message in chat_history %}
+          <p class="chat-message {{ message.role }}-message">
+            
+              <strong>{{ message.role|capfirst }}:</strong> {{ message.text|slice:"0:300" }}
+          </p>
+      {% endfor %}
+  </div> {% endcomment %}
+  <div class="chat-container">
+    <div class="chat-output" id="chatOutput">
+      {% for message in chat_history %}
+          <p class="chat-message {{ message.role }}-message">
+            
+              <strong>{{ message.role }}:</strong> {{ message.text|slice:"0:500" }}
+          </p>
+      {% endfor %}
+        <!-- Chat messages will be appended here -->
+    </div>
+    <div class="chat-input-container">
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" id="chatInput" name="message" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button></form>
+        <!-- <form action="" method="post">
+          {% csrf_token %}
+        <button name="clear">clear</button>
+      </form> -->
+    </div>
+</div>
+
+    <!-- Modal body -->
+    {% comment %} <form class="modal-body" class="fixed-form" style="margin-top:25rem ; 
+    
+    " method="post">
+      {% csrf_token %}
+      <div>
+        <label for="name"> Search Medicine</label>
+        <input type="text" name="message" id="name" placeholder="Search Medicine" required>
+        <button type="submit" class="submit-button">
+       
+          Search
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+       
+      </div>
+    </form> {% endcomment %}
+  </div>
+</div>
+    <!-- this is nav bar -->
+    <nav class="navbar">
+    <div class="logo">
+        <a href="/"> <img src="{% static "images/logo.png" %}" alt=""></a>
+        <div style="width: 80%;
+        max-width: 800px;">
+          <div id="chat-box" class="chat-box">
+              <!-- Messages will appear here -->
+          </div>
+          <!-- <div class="input-container">
+              <input type="text" id="user-input" placeholder="Type a message...">
+              <button id="send-btn">Send</button>
+          </div> -->
+      </div>
+      <script src="script.js"></script>
+
+    </div>
+    <div class="menu">
+      <ul>
+        <li>
+          <!-- <div class="s">
+            
+            <img  style="height: 1.2rem; width: 1.2rem;" src="{% static "images/doctor2.png" %}" alt="">
+          </div> -->
+            <a href="/Doctor">Doctors</a>
+        </li>
+        <li>
+            <a href="/Shop">Become a Shopkeper</a>
+        </li>
+        <li>
+            <a href="#medi">Medicine</a>
+        </li>
+      </ul>
+    </div>
+    <div class="btn">
+     <ul>
+        <li>
+            <a href="/login">
+              <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/profile.png" %}" alt="">
+                {% if request.user.is_authenticated %}
+                <span> Hello,{{ request.user.first_name|slice:"0:8" }}</span>
+              {% comment %} <a href="{% url 'logout' %}" class="text-[1.8rem] text-gray-700">Logout</a> {% endcomment %}
+                {% else %}
+                <span> Login </span>
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a href="/Shop">
+              <img  style="height: 1.2rem; width: 1.2rem;" src="{% static "images/shop.jpg" %}" alt="">
+                <span>  Shop</span>
+            </a>
+        </li>
+        <li>
+          {% if request.user.is_authenticated  %}
+          
+          <a href="/Cart">
+            <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/cart.png" %}" alt="">
+            <span> Cart</span>
+          </a>
+            {% else %}
+            <a href="/login">
+              <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/cart.png" %}" alt="">
+              <span> Cart</span>
+              
+            </a>
+            {% endif %}
+          </li>
+          <li>
+              {% if request.user.is_authenticated  %}
+              <a href="/Profile">
+                <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/profile.png" %}" alt="">
+                <span> Profile</span>
+            </a>
+            {% else %}
+            <a href="/login">
+              <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/profile.png" %}" alt="">
+              <span> Profile</span>
+          </a>
+          {% endif %}
+        </li>
+        {% if request.user.is_authenticated %}
+      
+      <a href="{% url 'logout' %}" class="text-[1.8rem] text-gray-700">
+        <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/logout.png" %}" alt="">
+        Logout</a>
+      {% endif %}
+     </ul>
+    </div>
+    </nav>
+    <!-- this is header -->
+    <section class="header">
+      <form method="get" action="{% url 'search' %}">
+      <div class="search">
+        <div class="input">
+       <input type="text" name="search" placeholder="Search here">
+    </div>
+  </form>
+    {% comment %} <div class="btn"> {% endcomment %}
+    <button><img src="{% static "images/search-removebg-preview.png" %}" alt="" width="20" height="20">  </button>
+    {% comment %} </div> {% endcomment %}
+      </div>
+      <div class="doctors">
+        {% for doctor in results  %}
+        {% if forloop.counter <= 5%}
+        {% comment %} {% if forloop.first or doctor != results|first %} {% endcomment %}
+        
+       <div class="box">
+        <a href="{% url 'dr_profile' doctor_name=doctor.doctor_name %}">
+           <img src="{{doctor.imageURL}}" alt=""></a>
+           <h3>{{doctor.doctor_name | slice:"0:100"}}</h3>
+            <h5>{{doctor.specialisation | slice:"0:100"}}</h5>
+          {% comment %}  {% endcomment %}
+             <div class="icon">
+                
+             </div>
+
+       </div>
+       {% endif %}
+       {% endfor %}
+     
+
+      </div>
+      <section class="hero-slider">
+         <div class="slider-container">
+       <div class="img">
+        <img src="https://consumer-app-images.pharmeasy.in/marketing/comp_india_covered.jpg" alt="">
+       </div>
+       <div class="img">
+        <img src="https://consumer-app-images.pharmeasy.in/marketing/comp_50lac.jpg" alt="">
+       </div>
+       <div class="img">
+        <img src="https://consumer-app-images.pharmeasy.in/marketing/comp_3step.jpg" alt="">
+       </div>
+       <div class="img">
+        <img src="https://consumer-app-images.pharmeasy.in/marketing/comp_cod.jpg" alt="">
+       </div> <div class="img">
+        <img src="https://consumer-app-images.pharmeasy.in/marketing/comp_cod.jpg" alt="">
+       </div>
+         </div>
+      </section>
+      <section class="search-product">
+        <h2>Top-searched specialties</h2>
+        <div class="products">
+        <div class="boxs">
+        <img src="{% static "images/primeart.jpeg" %}" alt="">
+        <h2>Primary Care</h2>
+        </div>
+        <div class="boxs">
+            <img src="{% static "images/teath.jpeg" %}" alt="">
+            <h2>Dentist</h2>
+            </div>
+            <div class="boxs">
+                <img src="{% static "images/ob-gy.jpeg" %}" alt="">
+                <h2>OB-GYN</h2>
+                </div>
+                <div class="boxs">
+                    <img src="{% static "images/Dermo.jpeg" %}" alt="">
+                    <h2>Dermatologist</h2>
+                    </div>
+                    <div class="boxs">
+                        <img src="{% static "images/phisi.jpeg" %}" alt="">
+                        <h2>Psychiatrist</h2>
+                        </div>
+                        <div class="boxs">
+                            <img src="{% static "images/teye.jpeg" %}" alt="">
+                            <h2>Eye Doctor</h2>
+                            </div>
+        </div>
+      </section>
+      <!-- <section class="Categories">
+        <h2>Shop by Categories</h2>
+        {% for product in products  %}
+          {% if forloop.counter <= 6 %}
+        <div class="categories-box">
+        <div class="categories-card">
+            <div class="product-card">
+              <img src="{{product.imageURL}}" alt="">
+            </div>
+            <h5>{{product.product_name}} </h5>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+      </section> -->
+      <section class="Tranding" id="medi">
+        <h2 >Trending Near You</h2>
+        {% comment %} {% for product in products  %} {% endcomment %}
+        <div class="Tranding-box">
+          {% for product in products  %}
+          {% if forloop.counter <= 6 %}
+        <div class="Tranding-card">
+            <div class="Tranding-imgs">
+              <a href="{% url 'product_view' product_name=product.product_name %}">
+                <img src="{{product.imageURL}}" alt="param">
+              </a>
+            </div>
+            
+          <a href="{% url 'product_view' product_name=product.product_name %}">  <h5 style="padding-left: 3rem;">{{product.product_name}} <br> {{product.description|slice:"0:25"}}....</h5></a>
+            {% comment %} <h5>MRP <del>₹599.00</del></h5> {% endcomment %}
+            <h4>₹{{product.price}}
+             <span>(48%)</span></h4>
+           
+        </div> 
+        {% endif %}{% endfor %}
+       
+          
+    </div>
+      </section>
+      <section class="Lab-Tests">
+        <h2>Lab Tests by Health Concern</h2>
+        <div class="lab-test-product">
+
+        <div class="Lab-Tests-box">
+        <div class="Lab-Tests-card">
+            <div class="Lab-Tests-card">
+            <img src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/bca113a1b80-Bone.png?dim=256x0" alt="">
+            </div>
+       
+        </div> 
+        </div> 
+        <div class="Lab-Tests-box">
+            <div class="Lab-Tests-card">
+                <div class="Lab-Tests-card">
+                    <img  src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/e1a18d8deac-Vitamins.png?dim=256x0" alt="">
+
+                </div>
+           
+            </div> 
+            </div> 
+            <div class="Lab-Tests-box">
+                <div class="Lab-Tests-card">
+                    <div class="Lab-Tests-card">
+                        <img src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/6b775dd8478-covid.png?dim=256x0" alt="">
+
+                    </div>
+               
+                </div> 
+                </div> 
+                <div class="Lab-Tests-box">
+                    <div class="Lab-Tests-card">
+                        <div class="Lab-Tests-card">
+                            <img src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/71fb3c06e71-Thyroid.png?dim=256x0" alt="">
+
+                        </div>
+                   
+                    </div> 
+                    </div> 
+                    <div class="Lab-Tests-box">
+                        <div class="Lab-Tests-card">
+                            <div class="Lab-Tests-card">
+                                <img src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/1e927857c26-Diabetes.png?dim=256x0" alt="">
+
+                            </div>
+                       
+                        </div> 
+                        </div> 
+                        <div class="Lab-Tests-box">
+                            <div class="Lab-Tests-card">
+                                <div class="Lab-Tests-card">
+                                    <img  src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/520acd31898-heart.png?dim=256x0" alt="">
+
+                                </div>
+                           
+                            </div> 
+                            </div> 
+                            <div class="Lab-Tests-box">
+                                <div class="Lab-Tests-card">
+                                    <div class="Lab-Tests-card">
+                                        <img src="https://cms-contents.pharmeasy.in/homepage_top_categories_images/9696ef00b0a-lifestyle.png?dim=256x0" alt="">
+   
+                                </div> 
+                                </div> 
+                                
+                            </div>
+      </section>
+      <section class="Tranding">
+        <h2>New Launches</h2>
+       <div class="Tranding-box">
+          {% for product in products  %}
+          {% if forloop.counter > 6 and forloop.counter <= 12 %}
+        <div class="Tranding-card">
+            <div class="Tranding-imgs">
+              <a href="{% url 'product_view' product_name=product.product_name %}">
+                <img src="{{product.imageURL}}" alt="param">
+              </a>
+            </div>
+            
+          <a href="{% url 'product_view' product_name=product.product_name %}">  <h5 style="padding-left: 3rem;">{{product.product_name}} <br> {{product.description|slice:"0:25"}}....</h5></a>
+            {% comment %} <h5>MRP <del>₹599.00</del></h5> {% endcomment %}
+            <h4>₹{{product.price}}
+             <span>(48%)</span></h4>
+           
+        </div> 
+        {% endif %}{% endfor %}
+      
+          
+    </div>
+    <div class="Tranding-box">
+      {% for product in products  %}
+      {% if forloop.counter > 12 and forloop.counter <= 18 %}
+    <div class="Tranding-card">
+        <div class="Tranding-imgs">
+          <a href="{% url 'product_view' product_name=product.product_name %}">
+            <img src="{{product.imageURL}}" alt="param">
+          </a>
+        </div>
+        
+      <a href="{% url 'product_view' product_name=product.product_name %}">  <h5 style="padding-left: 3rem;">{{product.product_name}} <br> {{product.description|slice:"0:25"}}....</h5></a>
+        {% comment %} <h5>MRP <del>₹599.00</del></h5> {% endcomment %}
+        <h4>₹{{product.price}}
+         <span>(48%)</span></h4>
+       
+    </div> 
+    {% endif %}{% endfor %}
+           
+          
+    </div>
+      </section>
+    </section>
+    <!-- this is footer -->
+    <footer>
+        <div class="container2">
+          <div class="footer-cols">
+            <ul>
+              <li>ABOUT</li>
+              <li>
+                <a href="/feedback">Feedback</a>
+              </li>
+              <li>
+                <a href="/aboutm"> About Us </a>
+              </li>
+              <li>
+                <a href="/contact"> Contact Us </a>
+              </li>
+            </ul>
+     
+            <ul>
+              <li> HELP </li>
+              {% comment %} <li>
+                <a href="#"> Payments </a>
+              </li>
+              <li>
+                <a href="#"> Shipping </a>
+              </li> {% endcomment %}
+              <li>
+                <a href="return/">Cancellation & return </a>
+              </li>
+            
+          
+            </ul> 
+    
+            <ul>
+              <li>  CONSUMER POLICY </li>
+            
+             
+              <li>
+                <a href="/security"> Security </a>
+              </li>
+              <li>
+                <a href="/privacy"> Privacy </a>
+              </li>
+                {% comment %} <li>
+                  <a href="#"> example </a>
+                </li>
+                {% endcomment %}
+           
+            
+            </ul>
+    
+            <ul>
+              <li> SOCIAL </li>
+              <li>
+                <a href="https://www.facebook.com/login/"><i class="fa-brands fa-facebook"></i> Facebook</a>
+              </li>
+              <li>
+                <a href="https://x.com/i/flow/logins"><i class="fa-brands fa-twitter"></i> X </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/accounts/login/?next=%2Flogin%2F&source=desktop_nav"><i class="fa-brands fa-instagram"></i> Instagram</a>
+              </li>
+              
+            </ul>
+    
+          </div>
+        </div>
+        
+    </footer>
+    
+  </main>
+<script>
+  document.getElementById('chatbot').addEventListener('click', function() {
+    document.getElementById('crud-modal').style.display = 'flex';
+  });
+
+  document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('crud-modal').style.display = 'none';
+  });
+
+  window.addEventListener('click', function(event) {
+    if (event.target === document.getElementById('crud-modal')) {
+      document.getElementById('crud-modal').style.display = 'none';
+    }
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('crud-modal');
+    const closeModalButton = document.getElementById('closeModal');
+
+    // Function to show the modal
+    function showModal() {
+        modal.style.display = 'block';
+    }
+
+    // Function to hide the modal
+    function hideModal() {
+        modal.style.display = 'none';
+        localStorage.removeItem('modalOpen'); // Clear the flag
+    }
+
+    // Check if the modal should be open on page load
+    if (localStorage.getItem('modalOpen') === 'true') {
+        showModal();
+    }
+
+    // When the form is submitted, set the flag to keep the modal open
+    document.querySelector('form').addEventListener('submit', function() {
+        localStorage.setItem('modalOpen', 'true');
+    });
+
+    // When the close button is clicked, hide the modal
+    closeModalButton.addEventListener('click', function() {
+        hideModal();
+    });
+});
+
+function sendMessage() {
+            const chatOutput = document.getElementById('chatOutput');
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value;
+
+            if (message.trim()) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message';
+                messageDiv.textContent = message;
+
+                chatOutput.appendChild(messageDiv);
+                {% comment %} chatInput.value = ''; {% endcomment %}
+
+                chatOutput.scrollTop = chatOutput.scrollHeight;
+            }
+        }
+
+        document.getElementById('chatInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+</script>
+</body>
+</html>

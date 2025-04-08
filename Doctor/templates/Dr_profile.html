@@ -1,0 +1,288 @@
+{% include "templates/ednav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'drprofile.css'%}">
+</head>
+
+<body>
+    <!-- navbar start -->
+
+    <!-- navbar end -->
+    <!-- search field -->
+    <section>
+        <section class="search-bar">
+            <div class="search">
+                <div class="search-item">
+                    <input class="" type="text" id="search-input1" placeholder="Search Disease">
+                </div>
+                <div class="search-item">
+                    <input class="input-2" type="text" id="search-input2" placeholder="Search Location">
+                    <button onclick="search()" class="">
+                    <img src="{% static "images/search-removebg-preview.png" %}" alt="" width="20" height="20">    
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div id="search-results">
+            <!-- Search results will appear here -->
+        </div>
+    </section>
+    <!-- search field end -->
+    <!--info navigation start  -->
+    <div class="info-nav">
+        <div class="container">
+            <a href="#" class="">
+                <img src="{% static "images/home-bg-removebg-preview.png" %}" alt="" width="18" height="18">
+            </a>
+            <span class="">
+                <img src="{% static "images/greater-2-removebg-preview.png" %}" alt="" width="12" height="10">
+            </span>
+
+            <a href="#" class="text">
+                Search-location
+            </a>
+
+            <span class="">
+                <img src="{% static "images/greater-2-removebg-preview.png" %}" alt="" width="12" height="10">
+            </span>
+
+            <a href="#" class="">
+                Search-disease
+            </a>
+            <span class="">
+                <img src="{% static "images/greater-2-removebg-preview.png" %}" alt="" width="12" height="10">
+            </span>
+
+            <a href="#" class="text1">
+                Dr.Name
+            </a>
+        </div>
+    </div>
+
+    <!-- profile start -->
+    <section class="profile">
+        <article class="first-article" id="overview">
+            <div class="first-div">
+                <div
+                    class="div-a">
+                    <div class="img-div">
+                        <img src="{{doctor.imageURL}}" alt=""
+                            width="100%" height="100%">
+                    </div>
+                    <div class="star-div">
+                        <div class="flex">
+                            <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                            <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                            <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                            <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                            <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                        </div>
+                        <div class="rating">
+                            <p class="">4.95</p>
+                            <p class="">out of</p>
+                            <p class="">5</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="div-b">
+                    <p class="dr-class">{{doctor.doctor_name}}</p>
+                    <p class="dr-class-2">{{doctor.specialisation}}</p>
+                    <p class="dr-class-2"> {{doctor.clinic_address}}
+                        <img src="{% static "images/location-removebg-preview.png" %}" alt="" height="25" width="25">
+                    <p class="dr-description">
+                        <span class="">{{doctor.doctor_name}}
+                            </span> is a {{doctor.specialisation}} specialist in Balaghat,mp. He is affiliated with
+                        medical facilities  Brooklyn Methodist Hospital and Balaghat
+                        Lower {{doctor.clinic_address}}. </p>
+                </div>
+            </div>
+            <div class="second-div">
+                <a href=""><button
+                        class="">
+                        <img src="{% static "images/white-2-removebg-preview.png" %}" alt="" width="20" height="15"> Save
+                    </button>
+                </a>
+                <a href=""><button
+                        class="share-btn">
+                       <img src="{% static "images/share-bg-removebg-preview.png" %}" alt="" width="15" height="15"> Share
+                    </button>
+                </a>
+            </div>
+        </article>
+        <!-- appoinment section  -->
+        <article
+            class="appoinment">
+            <div class="box">
+                <div class="accept-sec">
+                    <img src="{% static "images/right-circle-removebg-preview.png" %}" alt="" width="17" height="17">&nbsp;
+                    <span> Accepting new patients</span>
+                </div>
+                <div class="tele-sec ">
+                    <img src="{% static "images/consulting.png" %}" alt="">&nbsp;
+                    <span>Telehealth services available</span>
+                </div>
+                <div
+                    class="call-sec">
+                    <img src="{% static "images/shield-removebg-preview.png" %} " alt="" width="15" height="16">&nbsp;
+                    <span> Call us to securely
+                        book <br> an appointment</span>
+                </div>
+                <span class="">Make an Appointment</span>
+                <a href="/Doctor/appointment" class=""><button
+                        class="">Appoinment</button></a>
+            </div>
+        </article>
+    </section>
+    <!-- profile end -->
+    <nav>
+        <ul
+            class="container">
+            <li><a href="#overview"
+                    class="nav-link">Overview</a>
+            </li>
+
+            <li><a href="#location"
+                    class="nav-link">Locations</a>
+            </li>
+
+            <li><a href="#experience"
+                    class="nav-link">Experience</a>
+            </li>
+
+            <li><a href="#specialization"
+                    class="nav-link">Specialization</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- location section -->
+    <section class="location" id="location">
+        <span class="">Location</span>
+        <iframe class=""
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29635.501179921772!2d80.16007831991179!3d21.802015148360315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2a5a2d3ebe9fa1%3A0x9c7bb7ea7f08169e!2sMoti%20Nagar%2C%20Balaghat%2C%20Madhya%20Pradesh%20481001!5e0!3m2!1sen!2sin!4v1711878911371!5m2!1sen!2sin"
+            width="200" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="">
+            <article class="">
+                <div>
+                 <img src="{% static "images/location-red-removebg-preview.png" %}" alt="" width="18" height="24">
+                </div>
+                <div>
+                    <span class="name">{{doctor.specialisation}}
+                    </span><br>
+                    <div class="adress">
+                        <span>{{doctor.clinic_address}}</span>
+                        {% comment %} <span>City,</span>
+                        <span>Pin Code</span> {% endcomment %}
+                    </div>
+                    <div class="contact">
+                        <span class=""><a href="#contact">Contact</a> <span class="slash">|</span>
+                            <a href="#directions">Directions</a></span>
+                    </div>
+                </div>
+            </article>
+            <article class="btns">
+                <span>New Patient?</span>
+                <span><a href="/Doctor/appointment" class="">
+                        <button>Appoinment</button></a></span>
+            </article>
+        </div>
+    </section>
+    <!-- experience section  -->
+    <section class="experience" id="experience">
+        <span>Experience</span>
+        <div>
+            <li>{{doctor.experience}}</li>
+            {% comment %} <li>Lecturer at Manav Rachna Dental College </li>
+            <li>Director Dental Department at Matrika Hospital</li>
+            <li>Dental Department at Apollo Cradle & Children Hospital, Indirapuram</li>
+            <li>Director My Smile Dentist, Indirapuram </li> {% endcomment %}
+        </div>
+    </section>
+    <!-- speacialization section -->
+    <section class="experience" id="specialization">
+        <span class="">Specialization</span>
+        <div class="">
+            <li>{{doctor.specialisation}}</li>
+            {% comment %} <li>Root Canal Treatment</li>
+            <li>Inlays & Onlay</li>
+            <li>Laminates & Veneers</li>
+            <li>Splinting</li>
+            <li>Teeth Whitening Procedures</li>
+            <li> Post & Core</li> {% endcomment %}
+        </div>
+    </section>
+    <!-- rating section -->
+    <section class="rating-2" id="rating">
+        <span class="">Ratings</span>
+        <div class="">
+            <article>
+                <div class="">
+                    <img class="" src="{% static "images/consulting.png" %}" alt="">
+                    <div>
+                        <p>Jese Leos <time datetime="2014-08-16 19:00">Joined on August 2014</time></p>
+                    </div>
+                </div>
+                <div class="div-2">
+                    <img src="{% static "images/star-removebg-preview.png" %}" alt=""  height="20">
+                    <img src="{% static "images/star-removebg-preview.png" %}" alt="" height="20">
+                    <img src="{% static "images/star-removebg-preview.png" %}" alt="" height="20">
+                    <img src="{% static "images/star-removebg-preview.png" %}" alt=""  height="20">
+                    <img src="{% static "images/star-removebg-preview.png" %}" alt="" height="20">
+                    <p class="">Thinking to buy another one!
+                    </p>
+                </div>
+                <footer class="">
+                    <p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p>
+                </footer>
+                <p>This is my third Invicta Pro Diver. They are just
+                    fantastic value for money. This one arrived yesterday and the first thing I did was set the time,
+                    popped on an identical strap from another Invicta and went in the shower with it to test the
+                    waterproofing.... No problems.</p>
+                <p class="p-2">It is obviously not the same build quality as those
+                    very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under
+                    £100! An absolute bargain.</p>
+                <a href="#" class="block">Read
+                    more</a>
+                <aside>
+                    <p class="">19 people found this helpful</p>
+                    <div class="">
+                        <a href="#"
+                            class="a-1">Helpful</a>
+                        <a href="#"
+                            class="a-2">Report
+                            abuse</a>
+                    </div>
+                </aside>
+            </article>
+
+        </div>
+    </section>
+    </section>
+    <footer>
+
+
+
+
+
+        <!-- navbar javascript -->
+        <script>
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        </script>
+        <!-- navbar javascript -->
+</body>
+
+</html>

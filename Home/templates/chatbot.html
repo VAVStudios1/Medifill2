@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with Bot</title>
+    <style>
+        .chat-message { margin-bottom: 10px; }
+        .user-message { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Chat with Bot</h1>
+    <div id="chatHistory">
+        {% for message in chat_history %}
+            <p class="chat-message {{ message.role }}-message">
+                <strong>{{ message.role|capfirst }}:</strong> {{ message.text|slice:"0:200" }}
+            </p>
+        {% endfor %}
+    </div>
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="text" id="message" name="message" placeholder="Type your message here..." required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

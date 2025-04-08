@@ -1,0 +1,191 @@
+{% comment %} {% include "templates/ednav.html" %} {% endcomment %}
+{% include "templates/ednav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="{% static "dashboard.css" %}">
+   <style>
+      
+  {% comment %} .container {
+        width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 4px;    
+        color: #6b7280;
+    }  {% endcomment %}
+    
+    input[type="text"], input[type="tel"], input[type="email"], textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #807d7d;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+    
+    input[type="file"] {
+        display: none;
+    }
+    
+    .upload-label {
+        display: inline-block;
+        background-color: #10847e;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 4px; 
+        cursor: pointer;
+    }
+    
+    button[type="submit"] {
+        background-color: #10847e;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #1acfc6;
+    }
+    </style> 
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul style=" display: flex;
+            flex-wrap: wrap;">
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnRQnt0IPw4AKmX9oqcCGESogZGqwCND3k4lMXq1M-g&s" alt="" style="height: 100%; border-radius: 50%; width: 100%;">                       </span>
+                            {% if request.user.is_authenticated %}
+                            <span class="title">{{ request.user.first_name|slice:"0:8" }}</span>
+                   {% endif %}
+                        </a>
+                </li>
+
+                <li>
+                    <a href="/Profile">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">User Info</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Profile/change">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Change Password</span>
+                    </a>
+                </li> 
+                <li>
+                    <a href="/Profile/myappointment">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">My Appointment</span>
+                    </a>
+                </li> 
+{% comment %} 
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Messages</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <span class="title">Password</span>
+                    </a>
+                </li> {% endcomment %}
+
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon">
+                            <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/logout.png" %}" alt="">
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="containerz">
+            <h1 style="padding: 2rem;
+            margin-left: 28rem;
+            color:#10847e;
+            ">Personal Information </h1>
+            <form id="personal-info-form"   style="   
+             margin-right: 20rem;
+            margin-left: 30rem;">
+                <label for="first-name">First Name:</label>
+                {% if request.user.is_authenticated %}
+                <input type="text" id="first-name" name="first-name" placeholder="{{ request.user.first_name|slice:"0:18" }}" >
+                
+                <br><br>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+                <br><br>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <br><br>
+                <label for="email">Email Address:</label>
+                
+                <input type="email" id="email" name="email" placeholder="{{ request.user.email|slice:"0:18" }}">
+                <br><br>
+                <label for="image-upload" class="upload-label">Upload Image:</label>
+                <input type="file" id="image-upload" name="image-upload" class="upload-input">
+                <br><br>
+                {% endif %}
+                <button type="submit">Submit</button>
+            </form>
+        </div> 
+
+
+
+
+
+</body>
+
+</html>

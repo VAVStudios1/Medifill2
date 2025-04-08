@@ -1,0 +1,339 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+    overflow-x: hidden !important;
+}
+
+/* -----------search bar style-------------- */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    >.search {
+        display: flex;
+        justify-content: space-between;
+        justify-content: center;
+        text-align: center;
+        margin-top: 4rem;
+        width: 46rem;
+        height: 2.6rem;
+        background-color: #f3f4f6;
+        border: 2px solid #e5e7eb;
+        border-radius: 9999px;
+        padding-top: 0.2rem;
+
+        >.search-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            >input {
+                margin-left: 1.5rem;
+                display: flex;
+                align-items: center;
+                width: 20rem;
+                height: 1.5rem;
+                border: none;
+                border-right: 2px solid #d1d5db;
+                background-color: #f3f4f6;
+                outline: none;
+            }
+
+            >button {
+                padding:0.5rem 1rem;
+                background-color: #10847e;
+                border: none;
+                border-top-right-radius: 9999px;
+                border-bottom-right-radius: 9999px;
+                margin-top: -0.3rem;
+            }
+
+            .input-2 {
+                border-right: none;
+            }
+
+            input::placeholder {
+                color: #b0b6bf;
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+/*------------ search bar style end-------------------*/
+/* --------info navigation start style--------- */
+.info-nav {
+    margin-left: 2.1rem;
+    margin-top: -3rem;
+
+    >.container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 1rem 0 1rem 0 1rem;
+        white-space: nowrap;
+        overflow-x: auto;
+
+        >a,
+        span {
+            color: #4b5563;
+            text-decoration: none;
+
+            >svg {
+                width: 1.25rem;
+                height: 1.25rem;
+            }
+        }
+
+        >a:hover {
+            text-decoration: underline;
+        }
+
+        >.text {
+            font-size: 16px;
+            color: #68717e;
+        }
+
+        >.text1 {
+            font-size: 16px;
+            color: #2563eb;
+        }
+    }
+
+}
+
+/* -----------info navigation end---------- */
+
+/* ------dr-proile start----- */
+section {
+    padding-top: 0rem;
+    padding-bottom: 3rem;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    >article {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1024px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+
+        >div {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+
+
+            >div {
+                padding-top: 1.25rem;
+                padding-bottom: 1.25rem;
+
+
+
+                >div {
+                    display: flex;
+                    gap: 1.5rem;
+                    padding-bottom: 2rem;
+                    margin-bottom: 2rem;
+                    border-bottom: 2px solid #e5e7eb;
+
+                    >.div-1 {
+                        >a {
+                            position: relative;
+                            display: block;
+                            height: 14rem;
+                            width: 10rem;
+                            overflow: hidden;
+                            border-radius: 0.375rem;
+                            border: none;
+                            background-color: #f3f4f6;
+                        }
+                    }
+
+                    >.div-2 {
+                        display: flex;
+                        flex: 1;
+                        flex-direction: column;
+                        justify-content: space-between;
+
+                        >div {
+                            >.p-1 {
+                                font-size: 1.875rem;
+                                font-weight: 600;
+                                color: #2d3748;
+                                width: 43vw;
+                            }
+
+                            >.p-2 {
+                                margin-top: 0.5rem;
+                                font-size: 1.125rem;
+                                font-weight: 500;
+                                color: #0202e5;
+                            }
+
+                            >div {
+                                display: flex;
+                                align-items: center;
+                                margin-top: 0.88rem;
+
+                                >svg {
+                                    width: 1rem;
+                                    height: 1rem;
+                                    color: #fde047;
+                                    margin-right: 0.25rem;
+                                }
+
+                                >p {
+                                    margin-left: 0.5rem;
+                                    font-size: 1rem;
+                                    font-weight: 700;
+                                    color: #111827;
+                                }
+
+                                >span {
+                                    width: 0.25rem;
+                                    height: 0.25rem;
+                                    margin-left: 0.375rem;
+                                    margin-right: 0.375rem;
+                                    background-color: #718096;
+                                    border-radius: 9999px;
+                                }
+
+                                >a {
+                                    font-size: 0.875rem;
+                                    font-weight: 500;
+                                    color: #111827;
+                                    text-decoration: underline;
+                                }
+
+                                >a:hover {
+                                    text-decoration: none;
+                                }
+                            }
+
+                            >.p-3 {
+                                margin-top: 0.8rem;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                color: #3d4550;
+                            }
+
+                            >.p-4 {
+                                color: #67758a;
+                                margin-top: 0.3rem;
+
+                                >span {
+                                    margin-top: -10rem !important;
+                                }
+
+                                >img {
+                                    margin-bottom: -0.5rem;
+                                }
+                            }
+                        }
+                    }
+
+                    >.div-3 {
+                        width: auto;
+                        justify-content: space-between;
+                        padding-top: 1rem;
+                        margin-left: rem;
+
+                        >a {
+                            >button {
+                                margin-top: 1rem;
+                                font-size: 18px;
+                                background-color: #06b6d4;
+                                padding: 0.30rem 2rem 0.30rem 2rem;
+                                border: 2px solid #ffffff;
+                                border-radius: 9999px;
+                                color: #ffffff;
+                            }
+
+                            >button:hover {
+                                background-color: transparent;
+                                border: 2px solid #06b6d4;
+                                color: #4b5563;
+                            }
+                        }
+
+                        >article {
+                            display: flex;
+                            align-items: center;
+                            gap: 1rem;
+                            margin-top: 1rem;
+
+                            >div {
+                                >span {
+                                    font-weight: 600;
+                                    font-size: 1rem;
+                                    color: #1e40af;
+                                }
+
+                                >div {
+                                    margin-top: 0.25rem;
+                                    font-size: 0.875rem;
+                                    font-weight: 500;
+                                }
+                            }
+                        }
+
+                        .second-div {
+                            width: 60vw;
+                            display: flex;
+                            gap: 1.25rem;
+                            margin-top: 1rem;
+
+                            >a {
+                                >button {
+                                    background-color: #10847e;
+                                    color: rgb(243 244 246);
+                                    padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+                                    border: 0.5px solid #10847e;
+                                    border-radius: 999px;
+                                    font-size: 16px;
+                                }
+
+                                >.share-btn {
+                                    background-color: transparent;
+                                    color: rgb(17 24 39);
+                                }
+
+                                >button:hover {
+                                    background-color: transparent;
+                                    color: rgb(17 24 39);
+                                }
+
+                                >.share-btn:hover {
+                                    background-color: #10847e;
+                                    color: rgb(243 244 246);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+        }
+    }
+
+    >hr {
+        width: 72vw;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        background-color: #e5e7eb;
+        height: 0.15rem;
+        border: none;
+    }
+}

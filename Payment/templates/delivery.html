@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Address Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #d3fcfa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    width: 40rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color:#10847e;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #42b5b0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Delivery Address</h2>
+        <form id="deliveryForm">
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" name="mobile" required>
+            
+            <label for="pinCode">Pin Code:</label>
+            <input type="text" id="pinCode" name="pinCode" required>
+            
+            <label for="houseNumber">House Number:</label>
+            <input type="text" id="houseNumber" name="houseNumber" required>
+            
+            <label for="building">Building:</label>
+            <input type="text" id="building" name="building">
+            
+            <label for="street">Street Name:</label>
+            <input type="text" id="street" name="street" required>
+            
+            <label for="landmark">Landmark:</label>
+            <input type="text" id="landmark" name="landmark">
+            
+            <label for="addressType">Address Type:</label>
+            <select id="addressType" name="addressType">
+                <option value="home">Home</option>
+                <option value="work">Work</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

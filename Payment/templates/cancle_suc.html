@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Cancelled</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #d3fcfa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    justify-content: end;
+    
+}
+
+.order-cancel {
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.order-cancel h1 {
+    color: #10847e;
+    margin-bottom: 10px;
+}
+
+.order-cancel .order-id {
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons button {
+    background-color: #10847e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #10847e;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="order-cancel">
+            <h1>Order Cancelled</h1>
+            <p>We're sorry to see you go.</p>
+            <p>Order ID: <span class="order-id">15711355235541322</span></p>
+            <div class="buttons">
+                <button onclick="returnToHome()">Return to Home</button>
+                <button onclick="contactSupport()">Contact Support</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function returnToHome() {
+            // Redirect to the home page
+            window.location.href = 'index.html';
+        }
+
+        function contactSupport() {
+            // Redirect to the support page or open a contact modal
+            window.location.href = 'support.html';
+        }
+    </script>
+</body>
+</html>

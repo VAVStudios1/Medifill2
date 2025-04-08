@@ -1,0 +1,129 @@
+{% include "templates/exnav.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    body {
+      background-color: #f9fafb;
+    }
+
+   .container {
+    width: 59rem;
+    /* padding-left: 24rem; */
+    margin-left: 18rem;
+    }
+
+   .feedback-card {
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+   .feedback-card h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+   .feedback-card p {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+
+   .feedback-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+   .feedback-form label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+
+   .feedback-form input,
+   .feedback-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: #6b7280;
+      border-radius: 0.375rem;
+      border: 1px solid #e5e7eb;
+    }
+
+   .feedback-form textarea {
+      height: 15rem;
+    }
+
+   .feedback-form button {
+      margin-top: 2rem;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+      background-color: #10847e;
+      border-radius: 0.375rem;
+      border: none;
+    }
+
+   .feedback-form button:hover {
+      background-color: #0b6a62;
+    }
+
+   .optional {
+      color: #718096;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="feedback-card">
+      <h2>Leave us a feedback</h2>
+      <p>We value your opinion and would love to hear from you. Please take a moment to share your thoughts about our medical services.</p>
+      <form class="feedback-form" method="post" >
+        {% csrf_token %}
+        <div>
+          <label for="name">Name:</label>
+          <br>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="number" class="optional">Number:</label>
+          <br>
+          <input type="tel" id="number" name="number" class="optional">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <br>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="feedback">Feedback:</label>
+          <br>
+          <textarea id="feedback" name="feedback" required></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

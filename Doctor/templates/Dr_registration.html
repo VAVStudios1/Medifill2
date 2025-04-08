@@ -1,0 +1,207 @@
+{% include "templates/ednav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical shokepper</title>
+  <style>
+    body{ 
+    width: 100%;
+    height: 100vh;
+text-align: center;
+
+font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+background-color: white;
+p{
+    font-size: large;
+    color: whitesmoke;
+}
+
+}
+.container{
+    
+    background-color: #42b5b0;
+    margin-left: 10rem;
+    height: 90vh;
+    width:80vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2rem;
+}
+.information{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+/* .buttonshop{
+   
+
+} */
+.button{
+    background-color: white;
+    border-radius: 40px;
+    padding: 12px 60px;
+    border: none;
+    margin-top: 5rem;
+    >a{
+        text-decoration-line: none;
+        font-size: large;
+        font-weight: bolder;
+        color: rgb(81, 80, 80);
+    }
+
+}
+a:hover{
+    color:#42b5b0;
+}
+.registration{
+    height: 80vh;
+    width: 900px;
+    background-color: white;
+    border-top-left-radius: 10rem;
+    border-bottom-left-radius: 10rem;
+     line-height: 4.5rem;
+    
+}
+ 
+.h1{
+    margin-top: 5rem;
+    margin-left: 5rem;
+    color: rgba(33, 33, 33, 0.719);
+    color:white;
+   
+}
+input{
+ padding: 10px 80px 10px 5px;
+ font-size: medium;
+ border-radius: 5px;
+ border: 1px solid gainsboro;
+ outline: none;
+}
+input:hover{
+ box-shadow: 0px 0px 3px gainsboro;
+ padding: 12px 80px 12px 5px;
+
+
+}
+.registation-btn{
+    background-color:#42b5b0;
+    width: 250px;
+    height: 40px;
+    float: right;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:7px;
+    margin: 2rem 1.5rem;
+   
+}
+
+   button{
+    background-color: white;
+     border-radius: 50px;
+     padding: 7px 35px;
+     font-size: large;
+     border: none;
+     color: #42b5b0;
+     cursor: pointer;
+     
+ }
+
+  button.disable{
+     background-color: #42b5b0;
+     border: none;
+     font-size: large;
+     color: white;
+     font-weight: bolder;
+     border-radius: 50px; 
+     padding: 7px 3px;
+
+   
+} 
+.button-registation{
+    
+color: white;
+background-color: #42b5b0;
+
+font-size: large;
+font-weight: bolder;
+float: right;
+margin: 2rem 1.5rem;
+cursor: pointer;
+
+}
+.button-registation:hover{
+    color: rgb(255, 251, 251);
+    background-color: #42b5b0;
+    
+    
+}
+  </style>
+</head>
+<body>
+ <div class="container">
+
+    <!-- ------------------- side heading section------------------- -->
+    <div class="content">
+        <h1>Welcome</h1>
+        <p>Please fill the Shopkeeper form </p>
+        <button class="button"><a href="#">Login</a></button>
+       </div> 
+       
+       
+<!-- --------------------- main registration containere------------------------ -->
+
+    <div class="registration">
+
+
+        <div class="registation-btn">
+           
+            <button class="drRegister" >Docter</button> 
+
+ 
+        </div>
+    
+          <h1 class="h1">Registration form for Shopkeeper</h1>
+    <form  method="post"  enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="information">
+           <div>
+    
+        <input type="text" class="skname" id="name" name="dname" placeholder=" Docter Name *" required>
+        
+        <br>
+        <input type="text"  id="email" placeholder="Phone number*" name="dnum" required>
+       
+        <br>
+        <input type="text" name="dspec" id="password" placeholder="specialisation *" required>
+        <br>
+        <input type="text" name="dexp" id="Confirm-password" placeholder="experience *" required style="margin-left:rem;">
+        <br>
+        <label style="margin-left:5rem;" for="doctor_image">Doctor Image:</label>
+        <input type="file" id="doctor_image" name="doctor_image"><br>
+        </div>
+        
+        <div style="margin-top:-5rem;">
+            <input type="text" name="dclin" id="number" placeholder="clinic_name" required>
+            <br>
+            <input type="text" name="dadd" id="Qualification" placeholder="clinic_address*" required>
+            <br>
+           <input type="text" name="state" id="License" placeholder="state*">
+            <br>  
+            <input type="text" name="city" id="" placeholder="city*">      
+        </div>
+    </div>
+    
+        <div>
+            <button type="submit" class="  button-registation">Register</button></div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Cancellation</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #d3fcfa;
+}
+
+.cancellation-form {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cancel-btn {
+  background-color: #10847e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cancel-btn:hover {
+  background-color: #4a9b97;
+}
+
+  </style>
+</head>
+<body>
+  <div class="cancellation-form">
+    <h2>Reasons for Cancellation</h2>
+    <form action="cancel_order.php" method="POST">
+      <label for="reason">Select a reason:</label>
+      <select id="reason" name="reason">
+        <option value="trying_out">I was just trying out</option>
+        <option value="delayed">Order is delayed</option>
+        <option value="duplicate">I have placed a duplicate order</option>
+        <option value="unhappy_delivery">I am unhappy with estimated delivery date</option>
+        <option value="unhappy_discount">I am unhappy with the discount</option>
+        <option value="already_purchased">I have already purchased medicines</option>
+        <option value="not_full_order">You are not delivering full order</option>
+        <option value="other">Other</option>
+      </select>
+      <br>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="4" cols="50"></textarea>
+      <br>
+      <input type="submit" value="Cancel Order" class="cancel-btn">
+    </form>
+  </div>
+</body>
+</html>

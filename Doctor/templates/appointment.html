@@ -1,0 +1,127 @@
+{% include "templates/ednav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Doctor Appointment Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-wrap:wrap;
+}
+
+.container {
+    background-color:white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    width: 1100px;
+    margin-top: 3rem;
+    margin-left:8rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 52px;
+    color:#10847e;
+    margin-right:6rem;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+}
+
+label {
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+    
+}
+
+input, select, textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    width: calc(80% - 22px); /* Adjust for padding and border */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #10847e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width:47.5rem;
+}
+
+button:hover {
+    background-color: #10847e;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Online Doctor Appointment Form</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter full Name. . . . . " required>
+            
+            {% comment %} <label for="email">Email</label>
+            <input type="email" id="email" name="email"  placeholder="Enter Email. . . . . "> {% endcomment %}
+            
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="number" placeholder="Enter your Phone Number. . . . . " required>
+            
+            {% comment %} <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" placeholder="Enter your Date Of Birth. . . . . " required> {% endcomment %}
+            
+            {% comment %} <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select> {% endcomment %}
+            
+            <label for="appointment-date">Preferred Appointment Date</label>
+            <input type="date" id="appointment-date" name="appointment_date" required>
+            
+            <label for="time">Preferred Time</label>
+            <input type="time" id="time" name="appointment_time" required>
+{% comment %}             
+            <label for="doctor">Select specialist</label>
+            <select id="doctor" name="doctor" required>
+                <option value="">Select</option>
+                <option value="dr-john">dermatologist</option>
+                <option value="dr-jane">cardiologist</option>
+                <option value="dr-williams">gynecologist</option>
+                <option value="dr-williams">neurologist</option>
+               
+
+            </select> {% endcomment %}
+{% comment %}             
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Enter any additional information here..."></textarea> {% endcomment %}
+            
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+</body>
+</html>

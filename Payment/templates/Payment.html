@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #d3fcfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.payment-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.payment-method {
+    margin-bottom: 15px;
+}
+
+.payment-method input {
+    margin-right: 10px;
+}
+
+.payment-details {
+    margin-top: 20px;
+}
+
+.card-details, .upi-details {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #10847e;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    
+}
+
+button:hover {
+    background-color: #42b5b0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Select Payment Method</h2>
+        <form action="/submit-payment" method="post">
+            <div class="payment-method">
+                <input type="radio" id="cod" name="payment" value="cod">
+                <label for="cod">Cash on Delivery</label>
+            </div>
+            <div class="payment-method">
+                <input type="radio" id="card" name="payment" value="card">
+                <label for="card">Card</label>
+            </div>
+            <div class="payment-method">
+                <input type="radio" id="upi" name="payment" value="upi">
+                <label for="upi">UPI</label>
+            </div>
+            <div class="payment-details" id="payment-details"></div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentMethods = document.querySelectorAll('input[name="payment"]');
+            const paymentDetails = document.getElementById('payment-details');
+
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    paymentDetails.innerHTML = ''; // Clear previous details
+
+                    if (this.value === 'card') {
+                        paymentDetails.innerHTML = `
+                            <div class="card-details">
+                                <label for="card-number">Card Number:</label>
+                                <input type="text" id="card-number" name="card-number" required>
+                                <label for="card-expiry">Expiry Date:</label>
+                                <input type="text" id="card-expiry" name="card-expiry" required>
+                                <label for="card-cvv">CVV:</label>
+                                <input type="text" id="card-cvv" name="card-cvv" required>
+                            </div>
+                        `;
+                    } else if (this.value === 'upi') {
+                        paymentDetails.innerHTML = `
+                            <div class="upi-details">
+                                <label for="upi-id">UPI ID:</label>
+                                <input type="text" id="upi-id" name="upi-id" required>
+                            </div>
+                        `;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

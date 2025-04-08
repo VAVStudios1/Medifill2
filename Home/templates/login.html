@@ -1,0 +1,55 @@
+{% include "templates/exnav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login up</title>
+    <link rel="stylesheet" href="{% static "login.css" %}">
+     <!-- rimix  icon cdn -->
+   {% comment %} <link
+   href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+   rel="stylesheet"
+/> {% endcomment %}
+</head>
+<body>
+         <!-- this is nav bar -->
+    
+       
+  <section class="container">
+
+    <!-- -----------image part----------- -->
+
+    <div class="img-section">
+      <h1>Welcome to MediFill</h1>
+      <p>LogIn with us and get exclusive Discounts <br> & Savings on Medicines. Get express delivery in 2hrs.</p>
+      <img src="{% static "images/Login.png" %}" alt="" width="450px" height="350px">
+    </div>
+
+
+  <!-- -----------end image part---------- -->
+
+ <!-- ------------- start sign in part----------- -->
+ <form  method="post">
+    <div class="log-in-page">
+      <div class="cantent">
+        
+          {% csrf_token %}
+         <h1>Log in</h1>
+        <p>login in to access your account</p>
+          <br>
+           <h3>Email address</h3>
+          <input type="email" name="email" id="" placeholder="Email">
+          <br><br>
+           <h3>password</h3>
+          <input type="password" name="password" id="" placeholder="password">
+        <h3><a href="/reset_password/">Forget password?</a></h3><br>
+        <button class="btn">Log-In</button>
+      </form>
+       <p style="color:#777777  ; padding-top: 1rem;">Don't have an acount yet? <span><a style="color: #10847e;" href="/signup">Sign up</a></span></p></div>
+    </div>
+    <!-- ----------------end sign in psrt------------- -->
+  </section>  
+</body>
+</html>

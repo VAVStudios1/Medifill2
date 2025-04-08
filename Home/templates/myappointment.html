@@ -1,0 +1,205 @@
+{% comment %} {% include "templates/ednav.html" %} {% endcomment %}
+{% include "templates/ednav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Admin Dashboard</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="{% static "dashboard.css" %}">
+    <link rel="stylesheet" href="{% static "searchdr.css" %}">
+    {% comment %} <link rel="stylesheet" href="{% static "searchdr.css" %}"> {% endcomment %}
+   <style>
+      
+  {% comment %} .container {
+        width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 4px;    
+        color: #6b7280;
+    }  {% endcomment %}
+    
+    input[type="text"], input[type="tel"], input[type="email"], textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #807d7d;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+    
+    input[type="file"] {
+        display: none;
+    }
+    
+    .upload-label {
+        display: inline-block;
+        background-color: #10847e;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 4px; 
+        cursor: pointer;
+    }
+    
+    button[type="submit"] {
+        background-color: #10847e;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #1acfc6;
+    }
+    </style> 
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul style=" display: flex;
+            flex-wrap: wrap;">
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnRQnt0IPw4AKmX9oqcCGESogZGqwCND3k4lMXq1M-g&s" alt="" style="height: 100%; border-radius: 50%; width: 100%;">                       </span>
+                        <span class="title">Medifill</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Profile">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">User Info</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/Profile/change">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Change Password</span>
+                    </a>
+                </li> 
+                <li>
+                    <a href="/Profile/myappointment">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">My Appointment</span>
+                    </a>
+                </li> 
+{% comment %} 
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Messages</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="help-outline"></ion-icon>
+                        </span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="settings-outline"></ion-icon>
+                        </span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <ion-icon name="lock-closed-outline"></ion-icon>
+                        </span>
+                        <span class="title">Password</span>
+                    </a>
+                </li> {% endcomment %}
+
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <span class="icon">
+                            <img class="lucky" style="height: 1rem; width: 1rem;" src="{% static "images/logout.png" %}" alt="">
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+        {% if appoint.exists %}
+        {% for app in appoint  %}
+        <section>
+          
+            <hr>
+            
+            {% comment %} {% if forloop.first or doctor != results|first %}  {% endcomment %}
+            <article>
+               
+                <div>
+                    <!-- dr -profile  start -->
+                    <div>
+                        <div style="border-bottom:0px; margin-bottom:-7rem;">
+                            <div class="div-1">
+                                <a href="">
+                                    <img src="{{app.Doctor_pid.imageURL}}" alt="doctor" width="100%" height="100%">
+    
+                                </a>
+                            </div>
+                            <div class="div-2">
+                                <div>
+                                    <p class="p-1">{{app.Doctor_pid.doctor_name | slice:"0:100"}}</p>
+                                    <p class="p-2">{{app.Doctor_pid.specialisation | slice:"0:100"}}</p>
+                                    
+                                    {% comment %} <div>
+                                        <img src="{% static "images/star-removebg-preview.png" %}" alt="" width="20" height="20">
+                                        <p>4.95</p>
+                                        <span></span>
+                                        <a href="#">73 reviews</a>
+                                    </div> {% endcomment %}
+                                    {% comment %} <p class="p-3">Patients Tell Us:</p> {% endcomment %}
+                                    <p class="p-4">
+                                        <img src="{% static "images/cal-removebg-preview.png" %}" alt="" width="24" height="25">
+                                        Easy scheduling</p>
+                                    <p class="p-4 ,par-1">
+                                        <img src="{% static "images/hand-heart-removebg-preview.png" %}" alt="" width="20" height="32">
+                                        <span>Employs friendly staff </span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                        </article>
+                        </section>
+
+{% endfor %}
+{% endif %}
+
+
+</body>
+
+</html>

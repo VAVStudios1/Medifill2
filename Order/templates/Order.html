@@ -1,0 +1,81 @@
+{% include "templates/exnav.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add cart</title>
+    <link rel="stylesheet" href="{% static 'order.css'%}">
+</head>
+<body>
+
+        <!-- this is search product -->
+        <section class=" all-product">
+            <span>
+                <h1>My Order</h1>
+            </span>
+            <a href="status"
+            style="  border-radius: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+             margin-top: -2.5rem;
+             margin-left: 80rem;
+             height: 2.5rem;
+             width: 10rem;
+             border: none;
+             color: white;
+             padding: 10px 10px;
+             background-color: #10847e;
+             font-weight: bold;" >Order Status</a>
+            <div class="search-product" style="margin-left: 10rem;">
+         <div class="search-cart">
+           <div class="boxs">
+       <img src="" alt="">
+           </div>
+           <div class="search-describe">
+                <a href="#">Rozagold 10mg Strip Of 10 Capsules</a> 
+  
+                <span class="main-desc">By SUN PHARMA</span>
+                <span class="head-desc ">10 Capsule(s) in Strip</span>
+                <span class=" sub-desc ">MRP <del>₹230.00</del> <span style="color:rgb(190 24 93)  ;"><b>14% OFF</b> </span> </span>
+                <span class="rs-desc "> ₹215.00</span>
+                <span class="head-desc ">Delivery by Tomorrow, before 10:00 pm</span>
+
+                <span class="head-desc">
+                  In stock
+                </span>
+           </div>
+         </div>
+         {% comment %} <div class="add-cart">
+            <div class="quantity">
+                <input type="number" value="1" />
+            </div><br>
+            <h4>
+                <a  href="#">Delete</a>
+            </h4>
+           
+         </div> {% endcomment %}
+         {% comment %} <div class="add-pro">
+            <span class="rs-desc">₹215.00</span>
+            <button class="btn-add"><a href="">Add Cart</a> </button>
+        </div> {% endcomment %}
+           </div>
+     {% comment %} <div class="total-amount">
+     <div class="descr">
+      <h3>Subtotal</h3>
+      <h3>Shipping</h3>
+      <h5>Total</h5>
+     </div>
+     <div class="total">
+        <h3>₹219.99<h3>
+        </h3>₹50.00</h3>
+        <h5>₹280.00</h5>
+     </div>
+     <button class="btn-add"><a href="">Chec Out</a> </button>
+     
+     </div> {% endcomment %}
+        </section>
+</body>
+</html>
