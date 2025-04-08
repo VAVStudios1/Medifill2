@@ -7,7 +7,7 @@ import datetime
 import os
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-import google.generativeai as genai
+# import google.generativeai as genai
 from Contact.models import FeedBack
 from Product.models import Product
 from django.contrib.auth import logout
@@ -22,48 +22,48 @@ User = get_user_model()
 
 
 
-api_key = os.environ.get("GENAI_API_KEY")
-if not api_key:
-    raise ValueError("API key not found in environment variables")
+# api_key = os.environ.get("GENAI_API_KEY")
+# if not api_key:
+#     raise ValueError("API key not found in environment variables")
 
-genai.configure(api_key=api_key)
+# genai.configure(api_key=api_key)
 
-# Create the model
-generation_config = {
-    "temperature": 0.9,
-    "top_p": 1,
-    "top_k": 0,
-    "max_output_tokens": 2048,
-    "response_mime_type": "text/plain",
-}
-safety_settings = [
-    {
-        "category": "HARM_CATEGORY_HARASSMENT",
-        "threshold": "BLOCK_MEDIUM_AND_ABOVE",
-    },
-    {
-        "category": "HARM_CATEGORY_HATE_SPEECH",
-        "threshold": "BLOCK_MEDIUM_AND_ABOVE",
-    },
-    {
-        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-        "threshold": "BLOCK_MEDIUM_AND_ABOVE",
-    },
-    {
-        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-        "threshold": "BLOCK_MEDIUM_AND_ABOVE",
-    },
-]
+# # Create the model
+# generation_config = {
+#     "temperature": 0.9,
+#     "top_p": 1,
+#     "top_k": 0,
+#     "max_output_tokens": 2048,
+#     "response_mime_type": "text/plain",
+# }
+# safety_settings = [
+#     {
+#         "category": "HARM_CATEGORY_HARASSMENT",
+#         "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+#     },
+#     {
+#         "category": "HARM_CATEGORY_HATE_SPEECH",
+#         "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+#     },
+#     {
+#         "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+#         "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+#     },
+#     {
+#         "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+#         "threshold": "BLOCK_MEDIUM_AND_ABOVE",
+#     },
+# ]
 
-model = genai.GenerativeModel(
-    model_name="gemini-1.0-pro",
-    safety_settings=safety_settings,
-    generation_config=generation_config,
-)
+# model = genai.GenerativeModel(
+#     model_name="gemini-1.0-pro",
+#     safety_settings=safety_settings,
+#     generation_config=generation_config,
+# )
 
-chat_session = model.start_chat(
-    history=[]
-)
+# chat_session = model.start_chat(
+#     history=[]
+# )
 
 
 
@@ -95,17 +95,17 @@ def index(request):
         ]
         return redirect('/')
    
-    chat_history = request.session.get('chat_history', [])
+    # chat_history = request.session.get('chat_history', [])
 
 
 
-    context = {
-        'chat_history': chat_history,
-        'products': products,
-        'results': results,
-    }
+    # context = {
+    #     'chat_history': chat_history,
+    #     'products': products,
+    #     'results': results,
+    # }
 
-    print(context)
+    # print(context)
     return render(request, 'Home/templates/index.html' , context  )
 
 def login(request):
