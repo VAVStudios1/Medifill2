@@ -81,31 +81,31 @@ def index(request):
     # if  request.session.session_key:
     #      request.session.flush()
  
-    if request.method == 'POST':
+    # if request.method == 'POST':
         
         
-        user_message = request.POST.get('message')
+    #     user_message = request.POST.get('message')
        
-        response = chat_session.send_message(user_message)
+    #     response = chat_session.send_message(user_message)
 
 
-        request.session['chat_history'] = request.session.get('chat_history', []) + [
-            {'role': 'user', 'text': user_message},
-            {'role': 'MediBot', 'text': response.text},
-        ]
-        return redirect('/')
+    #     request.session['chat_history'] = request.session.get('chat_history', []) + [
+    #         {'role': 'user', 'text': user_message},
+    #         {'role': 'MediBot', 'text': response.text},
+    #     ]
+    #     return redirect('/')
    
     # chat_history = request.session.get('chat_history', [])
 
 
 
-    # context = {
-    #     'chat_history': chat_history,
-    #     'products': products,
-    #     'results': results,
-    # }
+    context = {
+       # 'chat_history': chat_history,
+        'products': products,
+        'results': results,
+    }
 
-    # print(context)
+    print(context)
     return render(request, 'Home/templates/index.html' , context  )
 
 def login(request):
